@@ -13,7 +13,7 @@
 #Code insipired from https://social.technet.microsoft.com/Forums/en-US/4d257c80-557a-4625-aad3-f2aac6e9a1bd/get-active-window-info?forum=winserverpowershell
 #
 
-#How to Run:
+#How to Run this script in the background:
 
 #Use the following command line
 
