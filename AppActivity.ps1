@@ -28,17 +28,16 @@ if($isRunning) {
 }
 
 
-#Create a log file name with the format of YYYY-MM-dd-appactivity.log
-#This allows to have one log file per day
-$logfileName=(Get-Date -Format "yyyy-MM-dd")+"-appactivity.log"
-#Change the following log path as you desire
-$path = "C:\AppLogs\"
-$logfile=$path+$logfileName
 
-#Check if $path exists; If not create the folder
+#Change the following log path as you desire; Make sure it trails with backslash (\).
+$path = "C:\ISD\Logs\"
+
+#Check if $path exists; If not create the hidden folder
 If(!(test-path $path))
 {
       New-Item -ItemType Directory -Force -Path $path
+	  $f=get-item $path -Force
+	  $f.attributes="Hidden"
 }
 
 #Uncomment below during codig and testing so that you have a fresh log file to start with
@@ -83,6 +82,13 @@ while(1){
 				Title=$previousProcessTitle
 			}
 
+
+		#Create a log file name with the format of YYYY-MM-dd-appactivity.log
+		#This allows to have a daily log
+		$logfileName=(Get-Date -Format "yyyy-MM-dd")+"-appactivity.log"
+		$logfile=$path+$logfileName
+
+		#Export data to a CSV file
 		$allData|Export-Csv -Append -Path $logfile
 		
 		#Reset timeSpent timer
